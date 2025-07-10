@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load place %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Регистрация</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <label for="id_email">Имейл</label>
+            {{ form.email.errors }}
+            {{ form.email|placeholder:"Email" }}
+
+        <label for="id_password1">Парола</label>
+            {{ form.password1.errors }}
+            {{ form.password1|placeholder:"Password" }}
+
+        <label for="id_password2">Потвърдете парола</label>
+            {{ form.password2.errors }}
+            {{ form.password2|placeholder:"Confirm password" }}
+
+        <button type="submit" class="btn btn-primary">Регистрирай се</button>
+    </form>
+    <p class="auth-footer-text">
+        Вече имате профил? <a href="{% url 'login' %}">Влезте</a>
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="prof-box">
+    <div class="profile-card">
+        {% if profile.profile_picture %}
+            <img src="{{ profile.profile_picture }}" alt="Профилна снимка" class="profile-image">
+        {% else %}
+            <img src="{% static 'images/default-profile.jpg' %}" alt="Профилна снимка" class="profile-image">
+        {% endif %}
+
+        <h2>{{ profile.username }}</h2>
+
+        {% if profile.date_of_birth %}
+            <p>Роден на: {{ profile.date_of_birth }}</p>
+        {% endif %}
+
+        <p>Email: {{ profile.user.email }}</p>
+    </div>
+</div>
+{% endblock %}

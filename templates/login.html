@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Вход в системата</h2>
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <label for="id_email">Имейл адрес</label>
+        {{ form.username }}
+
+        <label for="id_password">Парола</label>
+        {{ form.password }}
+
+        <button type="submit" class="btn btn-primary">Вход</button>
+    </form>
+    <p class="auth-footer-text">
+        Нямате профил? <a href="{% url 'register' %}">Регистрирайте се</a>
+    </p>
+</div>
+{% endblock %}

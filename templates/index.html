@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="content-wrapper">
+    <section class="main-article" id="mainArticle">
+        <h2>{{ articles.0.title }}</h2>
+        <p>{{ articles.0.summary }}</p>
+        <img src="{{ articles.0.image.url }}" alt="{{ articles.0.title }}" class="main-image">
+    </section>
+
+    <aside class="sidebar">
+        {% for article in articles|slice:"1:" %}
+        <div class="small-article" onclick="swapWithMain(this)">
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.summary }}</p>
+            <img src="{{ article.image.url }}" alt="{{ article.title }}" class="sidebar-image">
+        </div>
+        {% endfor %}
+    </aside>
+</main>
+{% endblock %}
