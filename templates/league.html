@@ -12,12 +12,10 @@
     <div class="teams-section">
         <ul class="teams-list">
             {% for club in league.clubs.all %}
-                <li class="team-item">
-                    <img src="{{ club.logo }}" alt="{{ club.eng_name }}" class="team-logo" />
-                    {{ club.name }}
-                </li>
-            {% empty %}
-                <li class="empty-league">Няма отбори в лигата.</li>
+            <li class="team-item">
+                <img src="{{ club.logo }}" alt="{{ club.eng_name }}" class="team-logo" />
+                {{ club.name }}
+            </li>
             {% endfor %}
         </ul>
     </div>
