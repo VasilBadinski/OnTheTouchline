@@ -21,27 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-function swapWithMain(clickedSidebar) {
-    const mainArticle = document.getElementById('mainArticle');
-
-    const mainTitle = mainArticle.querySelector('h2').textContent;
-    const mainSummary = mainArticle.querySelector('p').textContent;
-    const mainImageSrc = mainArticle.querySelector('img').src;
-    const mainImageAlt = mainArticle.querySelector('img').alt;
-
-    const sideTitle = clickedSidebar.querySelector('h2').textContent;
-    const sideSummary = clickedSidebar.querySelector('p').textContent;
-    const sideImage = clickedSidebar.querySelector('img');
-
-    mainArticle.querySelector('h2').textContent = sideTitle;
-    mainArticle.querySelector('p').textContent = sideSummary;
-    const mainImage = mainArticle.querySelector('img');
-    mainImage.src = sideImage.src;
-    mainImage.alt = sideImage.alt;
-
-    clickedSidebar.querySelector('h2').textContent = mainTitle;
-    clickedSidebar.querySelector('p').textContent = mainSummary;
-    sideImage.src = mainImageSrc;
-    sideImage.alt = mainImageAlt;
+function toggleLeagueMenu() {
+    const menu = document.getElementById("league-submenu");
+    menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
 }
-

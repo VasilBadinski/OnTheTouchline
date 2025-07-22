@@ -1,3 +1,9 @@
 @import "base.css";
 @import "home.css";
 @import "details_profile.css";
+@import "login_profile.css";
+@import "register_account.css";
+@import "create_article.css";
+@import "article_details.css";
+@import "news.css";
+@import "league.css";

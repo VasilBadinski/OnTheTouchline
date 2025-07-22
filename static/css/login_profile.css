@@ -1,35 +1,39 @@
-body, html {
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #1f1c24, #3c0f0f);
-  color: #eee;
+}
+
+.page-center {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-wrapper {
+  padding: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .auth-container {
-  background: #2a1f1f;
+  background: #1c1c1c;
   padding: 40px 45px;
   border-radius: 20px;
   width: 360px;
   max-width: 95vw;
   text-align: center;
-  border: 2px solid #b00020;
   transition: transform 0.3s ease;
-}
-
-.auth-container:hover {
-  transform: scale(1.03);
 }
 
 .auth-container h2 {
   margin-bottom: 28px;
   font-weight: 900;
   font-size: 2.1rem;
-  color: #ff3b3b;
+  color: white;
   letter-spacing: 1.5px;
 }
 
@@ -39,36 +43,35 @@ body, html {
   margin-bottom: 8px;
   font-weight: 700;
   font-size: 1rem;
-  color: #f2b8b8;
+  color: white;
 }
 
 .auth-form input {
   width: 100%;
   padding: 14px 16px;
   margin-bottom: 24px;
-  border: 2px solid #b00020;
+  border: 2px solid white;
   border-radius: 14px;
   font-size: 1.1rem;
-  background: #321e1e;
+  background: #444;
   color: #f0eaea;
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .auth-form input::placeholder {
-  color: #b07a7a;
+  color: white;
   font-style: italic;
 }
 
 .auth-form input:focus {
   background: #420d0d;
   outline: none;
-  border-color: #ff3b3b;
 }
 
 .auth-form .btn-primary {
   width: 100%;
   padding: 16px;
-  background: linear-gradient(90deg, #b00020, #ff3b3b);
+  background: #b00020;
   border: none;
   border-radius: 50px;
   color: white;
@@ -79,7 +82,7 @@ body, html {
 }
 
 .auth-form .btn-primary:hover {
-  background: linear-gradient(90deg, #ff3b3b, #b00020);
+  background: #ff3b3b;
 }
 
 .auth-footer-text {
@@ -89,12 +92,19 @@ body, html {
 }
 
 .auth-footer-text a {
-  color: #ff5656;
+  color: #b00020;
   font-weight: 700;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .auth-footer-text a:hover {
-  color: #b00020;
+  color: #ff5656;
+}
+
+.form-error {
+  color: #ff4d4f;
+  font-size: 0.95rem;
+  margin: 6px 0 10px;
+  text-align: left;
 }

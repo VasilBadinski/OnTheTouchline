@@ -5,6 +5,17 @@ html, body {
   font-family: Arial, sans-serif;
   color: #eee;
   overflow-x: hidden;
+  height: 100%;
+}
+
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-content {
+  flex: 1;
 }
 
 header {
@@ -20,12 +31,12 @@ header {
   z-index: 1000;
   box-sizing: border-box;
   border-bottom: 10px solid #b00020;
+  padding-left: 10px;
 }
 
 .header-inner {
   display: flex;
   align-items: center;
-  padding-left: 10px;
 }
 
 .menu {
@@ -46,7 +57,7 @@ header {
   height: auto;
 }
 
-.logo-text{
+.logo-text {
   margin-left: 3px;
   color: white;
   font-size: 1.25rem;
@@ -92,17 +103,36 @@ header {
   color: #f1f1f1;
 }
 
-.login {
+.sidenav a.active {
+  color: #ff3333;
+  font-weight: bold;
+}
+
+.auth-links {
   margin-left: auto;
   display: flex;
+  gap: 15px;
   align-items: center;
-  gap: 8px;
+  padding-right: 20px;
+}
+
+.auth-links .login,
+.auth-links .register {
   text-decoration: none;
-  color: inherit;
+  color: white;
   font-weight: bold;
-  position: relative;
   padding: 8px 12px;
-  padding-bottom: 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.auth-links .login:hover,
+.auth-links .register:hover {
+  background-color: #b00020;
 }
 
 .login img {
@@ -116,7 +146,6 @@ footer {
   padding: 20px 40px;
   text-align: center;
   font-size: 14px;
-  margin-top: 40px;
 }
 
 .footer-container {
@@ -145,39 +174,62 @@ footer {
   text-decoration: none;
   color: white;
   font-weight: bold;
-  position: static;
 }
 
-.sidenav a.active {
-  color: #ff3333;
+.user-link {
+  display: flex;
+  align-items: center;
+  color: white;
   font-weight: bold;
+  padding: 8px 12px;
+  gap: 10px;
+  text-decoration: none;
+  margin-left: auto;
 }
 
-.auth-links {
-    margin-left: auto;
-    display: flex;
-    gap: 15px;
-    align-items: center;
+.user-link img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
 }
 
-.auth-links .login,
-.auth-links .register {
+.menu-separator {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 20px;
+  height: 1px;
+  background-color: transparent;
+}
+
+.league-submenu {
+    display: none;
+    flex-direction: column;
+    padding: 10px 15px;
+    margin-left: 10px;
+}
+
+.league-submenu a {
+    color: #818181;
+    padding: 6px 0 0 10px;
     text-decoration: none;
+    transition: background 0.2s ease;
+    font-size: 17px;
+}
+
+.league-submenu a:hover {
     color: white;
-    font-weight: bold;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
 }
 
-.auth-links .login:hover {
-    background-color: #b00020;
+.empty-league {
+    color: #aaa;
+    font-size: 0.9rem;
+    padding: 5px;
 }
 
-.auth-links .register:hover {
-    background-color: #b00020;
+.small-logo {
+  padding-right: 5px;
+  width: 15px;
+  height: auto;
 }

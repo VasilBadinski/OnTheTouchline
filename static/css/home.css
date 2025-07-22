@@ -1,11 +1,28 @@
 .content-wrapper {
     display: flex;
     justify-content: center;
-    align-items: stretch;
+    align-items: flex-start;
     margin: 40px auto;
-    max-width: 1200px;
+    max-width: 900px;
     padding: 70px 20px;
     gap: 40px;
+    flex-wrap: wrap;
+}
+
+.top-logo {
+    width: 100%;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+}
+
+.top-logo img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 1px 80px #444;
+  object-position: 50% calc(50% - 30px);
 }
 
 .main-article {
@@ -14,8 +31,34 @@
     padding: 20px;
     color: white;
     border-radius: 8px;
-    transform: translateX(-30px);
-    height: 440px;
+    height: auto;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.main-article:hover{
+    background-color: #444;
+}
+
+.article-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.article-des {
+    font-size: 16px;
+    line-height: 1.6;
+    color: white;
+}
+
+.main-image {
+    width: 100%;
+    height: auto;
+    max-height: 277px;
+    object-fit: cover;
+    border-radius: 4px;
 }
 
 .sidebar {
@@ -23,10 +66,11 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    min-width: 280px;
 }
 
 .small-article {
-    background-color: #2c2c2c;
+    background-color: #1c1c1c;
     color: white;
     padding: 10px;
     border-radius: 8px;
@@ -39,19 +83,34 @@
     background-color: #444;
 }
 
-.main-image {
-    width: 80%;
-    height: 300px;
-    object-fit: cover;
-    margin-top: 15px;
-    border-radius: 4px;
-    overflow-y: auto;
-}
-
 .sidebar-image {
     width: 100%;
-    height: 80px;
+    height: 100px;
     object-fit: cover;
     margin-top: 10px;
     border-radius: 4px;
+}
+
+.nota {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:90px;
+    font-family: 'Playfair Display', serif;
+    height: 40vh;
+    text-align: center;
+}
+
+.main-article a,
+.main-article a h2,
+.small-article a,
+.small-article a h2 {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: white;
 }

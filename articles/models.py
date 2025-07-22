@@ -24,7 +24,9 @@ class Article(models.Model):
 
     author = models.ForeignKey(
         Profile,
-        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
         related_name='article'
     )
 

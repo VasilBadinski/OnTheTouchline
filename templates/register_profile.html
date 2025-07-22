@@ -1,29 +1,32 @@
 {% extends 'base.html' %}
-{% load place %}
+{% load placeholder_filter %}
+
+{% block title %}OnTheTouchline | Register Account{% endblock %}
 
 {% block content %}
-<div class="auth-container">
-    <h2>Регистрация</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
+<div class="page-center">
+    <div class="register-container">
+        <h2>Регистрация</h2>
+        <form method="post" class="register-form">
+            {% csrf_token %}
 
-        <label for="id_email">Имейл</label>
-            {{ form.email.errors }}
-            {{ form.email|placeholder:"Email" }}
+            {{ form.username|placeholder:"Username" }}
+            {% if form.username.errors %}
+                <div class="form-error">{{ form.email.errors }}</div>
+            {% endif %}
 
-        <label for="id_password1">Парола</label>
-            {{ form.password1.errors }}
-            {{ form.password1|placeholder:"Password" }}
+            {{ form.date_of_birth|placeholder:"Date of birth" }}
+            {% if form.date_of_birth.errors %}
+                <div class="form-error">{{ form.date_of_birth.errors }}</div>
+            {% endif %}
 
-        <label for="id_password2">Потвърдете парола</label>
-            {{ form.password2.errors }}
-            {{ form.password2|placeholder:"Confirm password" }}
+            {{ form.profile_picture|placeholder:"Picture" }}
+            {% if form.profile_picture.errors %}
+                <div class="form-error">{{ form.profile_picture.errors }}</div>
+            {% endif %}
 
-        <button type="submit" class="btn btn-primary">Регистрирай се</button>
-    </form>
-    <p class="auth-footer-text">
-        Вече имате профил? <a href="{% url 'login' %}">Влезте</a>
-    </p>
+            <button type="submit" class="btn-primary">Регистриране</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

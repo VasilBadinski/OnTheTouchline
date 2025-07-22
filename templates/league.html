@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}OnTheTouchline | {{ league.eng_name }}{% endblock %}
+
+{% block content %}
+<div class="league-page">
+    <div class="league-header horizontal">
+        <img src="{{ league.logo }}" alt="{{ league.eng_name }}" class="league-image" />
+        <h1 class="league-name">{{ league.eng_name }}</h1>
+    </div>
+
+    <div class="teams-section">
+        <ul class="teams-list">
+            {% for club in league.clubs.all %}
+                <li class="team-item">
+                    <img src="{{ club.logo }}" alt="{{ club.eng_name }}" class="team-logo" />
+                    {{ club.name }}
+                </li>
+            {% empty %}
+                <li class="empty-league">Няма отбори в лигата.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
