@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404
 from accounts.models import Profile
+from articles.models import Article
 from core.models import Leagues
 
 
@@ -17,4 +17,9 @@ def user_profile(request):
 def leagues_processor(request):
     return {
         'leagues': Leagues.objects.all()
+    }
+
+def news_processor(request):
+    return {
+        'articles': Article.objects.all()
     }

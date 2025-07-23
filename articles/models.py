@@ -3,6 +3,8 @@ from django.db import models
 from django.utils.text import slugify
 from accounts.models import Profile
 from articles.validators import ArticleValidator
+from core.models import Leagues, Player, Clubs
+
 
 class Article(models.Model):
     title = models.CharField(
@@ -36,7 +38,32 @@ class Article(models.Model):
 
     published = models.BooleanField(default=False)
 
-    slug = models.SlugField(max_length=150, unique=True, editable=False)
+    slug = models.SlugField(
+        max_length=150,
+        unique=True,
+        editable=False
+    )
+
+    league = models.ForeignKey(
+        Leagues,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    club = models.ForeignKey(
+        Clubs,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    player = models.ForeignKey(
+        Player,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
 
     def save(self, *args, **kwargs):
         base_slug = slugify(self.title)

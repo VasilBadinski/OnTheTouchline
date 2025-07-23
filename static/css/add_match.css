@@ -1,35 +1,43 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 .page-center {
-  height: 90vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 100px;
+  padding-bottom: 1000px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.auth-wrapper {
-  padding: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.auth-container {
-  background: #1c1c1c;
-  padding: 40px 45px;
+.article-create-container {
+  background-color: #1c1c1c;
+  padding: 30px 45px;
   border-radius: 20px;
-  width: 360px;
+  width: 800px;
   max-width: 95vw;
   text-align: center;
   transition: transform 0.3s ease;
 }
 
-.auth-container h2 {
+.article-create-container h2 {
   margin-bottom: 28px;
   font-weight: 900;
   font-size: 2.1rem;
@@ -37,7 +45,7 @@ html, body {
   letter-spacing: 1.5px;
 }
 
-.auth-form label {
+.article-create-form label {
   display: block;
   text-align: left;
   margin-bottom: 8px;
@@ -46,7 +54,9 @@ html, body {
   color: white;
 }
 
-.auth-form input {
+.article-create-form input,
+.article-create-form textarea,
+.article-create-form select {
   width: 100%;
   padding: 14px 16px;
   margin-bottom: 24px;
@@ -56,18 +66,32 @@ html, body {
   background: #444;
   color: #f0eaea;
   transition: border-color 0.3s ease, background-color 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
 }
 
-.auth-form input::placeholder {
+.article-create-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.article-create-form input::placeholder,
+.article-create-form textarea::placeholder {
   color: white;
 }
 
-.auth-form input:focus {
+.article-create-form input:focus,
+.article-create-form textarea:focus,
+.article-create-form select:focus {
   background: #420d0d;
   outline: none;
+  border-color: white;
 }
 
-.auth-form .btn-primary {
+.article-create-form .btn-primary {
   width: 100%;
   padding: 16px;
   background: #b00020;
@@ -80,28 +104,11 @@ html, body {
   transition: background 0.4s ease;
 }
 
-.auth-form .btn-primary:hover {
+.article-create-form .btn-primary:hover {
   background: #ff3b3b;
 }
 
-.auth-footer-text {
-  margin-top: 18px;
-  font-size: 0.95rem;
-  color: #d4a2a2;
-}
-
-.auth-footer-text a {
-  color: #b00020;
-  font-weight: 700;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.auth-footer-text a:hover {
-  color: #ff5656;
-}
-
-.form-error {
+.article-create-form .form-error {
   color: #ff4d4f;
   font-size: 0.95rem;
   margin: 6px 0 10px;

@@ -1,0 +1,42 @@
+.position-title {
+  border-bottom: 3px solid #b00020;
+  padding-bottom: 6px;
+  margin-bottom: 16px;
+  font-size: 15px;
+  color: white;
+}
+
+.club-nav {
+  background: #1c1c1c;
+  padding: 12px 20px;
+  margin-top: 10px;
+}
+
+.club-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  padding: 0;
+  margin: 0;
+}
+
+.club-nav li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  padding-bottom: 4px;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.club-nav li.active a {
+  border-bottom: 3px solid #b00020;
+}
+
+.club-nav li a:hover {
+  border-bottom: 3px solid #ff3b3b;
+}
+
+.nav-tab.active a {
+  border-bottom: 3px solid #b00020;
+}

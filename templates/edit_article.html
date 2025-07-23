@@ -26,6 +26,21 @@
                 <div class="form-error">{{ form.imageURL.errors }}</div>
             {% endif %}
 
+            {{ form.league }}
+            {% if form.league.errors %}
+                <div class="form-error">{{ form.league.errors }}</div>
+            {% endif %}
+
+            {{ form.club }}
+            {% if form.club.errors %}
+                <div class="form-error">{{ form.club.errors }}</div>
+            {% endif %}
+
+            {{ form.player }}
+            {% if form.player.errors %}
+                <div class="form-error">{{ form.player.errors }}</div>
+            {% endif %}
+
             <button type="submit" class="btn-primary">Запази промените</button>
         </form>
     </div>

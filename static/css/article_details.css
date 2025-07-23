@@ -2,7 +2,7 @@
     max-width: 800px;
     margin: 120px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #1c1c1c;
     border-radius: 16px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -23,7 +23,7 @@
 .article-title {
     font-size: 2rem;
     font-weight: bold;
-    color: #222;
+    color: white;
     margin: 0;
     border-bottom: 2px solid #eaeaea;
     padding-bottom: 10px;
@@ -32,14 +32,14 @@
 .article-description {
     font-size: 1.1rem;
     line-height: 1.7;
-    color: #444;
+    color: white;
 }
 
 .article-meta {
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
-    color: #777;
+    color: white;
     border-top: 1px solid #ddd;
     padding-top: 15px;
 }

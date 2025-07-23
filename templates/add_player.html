@@ -16,9 +16,19 @@
                 <div class="form-error">{{ form.name.errors }}</div>
             {% endif %}
 
+            {{ form.position|placeholder:"Позиция" }}
+            {% if form.position.errors %}
+                <div class="form-error">{{ form.position.errors }}</div>
+            {% endif %}
+
             {{ form.photo|placeholder:"Снимка" }}
             {% if form.photo.errors %}
                 <div class="form-error">{{ form.photo.errors }}</div>
+            {% endif %}
+
+            {{ form.number|placeholder:"Номер" }}
+            {% if form.number.errors %}
+                <div class="form-error">{{ form.number.errors }}</div>
             {% endif %}
 
             {{ form.eng_name|placeholder:"Име на английски" }}

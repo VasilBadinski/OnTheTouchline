@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Vasil Badinski" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="icon" href="{% static 'images/freepik.png' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'images/freepik.ico' %}" type="image/png" />
     <title>{% block title %}OnTheTouchline | Home{% endblock %}</title>
 </head>
 <body>
@@ -40,7 +40,7 @@
                     <a href="{% url 'add-league' %}">Добави лига</a>
                     <a href="{% url 'add-club' %}">Добави клуб</a>
                     <a href="{% url 'add-player' %}">Добави играч</a>
-                    <a href="#">Добави мач</a>
+                    <a href="{% url 'add-matches' %}">Добави мач</a>
                 {% endif %}
             </nav>
 

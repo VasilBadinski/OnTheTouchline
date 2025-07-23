@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'common.functions.user_profile',
                 'common.functions.leagues_processor',
+                'common.functions.news_processor',
             ],
         },
     },

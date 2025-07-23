@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}OnTheTouchline | {{ club.eng_name }}{% endblock %}
+
+{% block content %}
+<div class="league-page">
+   <div class="league-header horizontal">
+      <img src="{{ club.logo }}" alt="{{ club.eng_name }}" class="league-image" />
+      <h1 class="league-name">{{ club.name }}</h1>
+   </div>
+
+   <nav class="club-nav">
+      <ul>
+         <li class="active"><a href="#">Обзор</a></li>
+         <li><a href="#">Мачове</a></li>
+         <li><a href="#">Играчите</a></li>
+         <li><a href="#">Новини</a></li>
+      </ul>
+   </nav>
+
+   <div class="league-content">
+      <div class="news-section">
+         <h2>Новини</h2>
+         {% for article in articles|slice:':3' %}
+         <div class="news-item">
+            <a href="{% url 'article-detail' article.slug %}">
+               <h3>{{ article.title }}</h3>
+               <img src="{{ article.imageURL }}" alt="i-article" class="news-image">
+            </a>
+            <p>{{ article.description|truncatewords:30 }}</p>
+         </div>
+         {% empty %}
+         <p>Няма новини за този отбор.</p>
+         {% endfor %}
+         {% if user.is_staff %}
+            <a href="{% url 'edit-club' club.slug %}" class="btn-primary">Редактирай</a>
+         {% endif %}
+      </div>
+
+      <div class="teams-standing">
+      </div>
+   </div>
+</div>
+{% endblock %}

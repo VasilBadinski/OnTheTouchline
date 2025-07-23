@@ -1,13 +1,17 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from core.choices import PlayerPositionChoices
 
 
 class Leagues(models.Model):
     name = models.CharField(max_length=100)
     logo = models.URLField()
     eng_name = models.CharField(max_length=100, default='Unknown')
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True, null=True)
+
+    class Meta:
+        ordering = ['pk']
 
     def __str__(self):
         return self.eng_name
@@ -16,13 +20,37 @@ class Leagues(models.Model):
         if not self.slug:
             self.slug = slugify(self.eng_name)
         super().save(*args, **kwargs)
+
 
 class Clubs(models.Model):
     name = models.CharField(max_length=100)
     logo = models.URLField()
     eng_name = models.CharField(max_length=100, default='Unknown')
-    slug = models.SlugField(unique=True, blank=True)
-    league = models.ForeignKey(Leagues, on_delete=models.CASCADE, related_name='clubs')
+    slug = models.SlugField(unique=True, null=True)
+    league = models.ForeignKey(Leagues, on_delete=models.CASCADE, related_name='clubs', null=True)
+    points = models.PositiveIntegerField(
+        default=0
+    )
+    goals = models.PositiveIntegerField(
+        default=0
+    )
+
+    played_games = models.PositiveIntegerField(
+        default=0
+    )
+
+    s_goals = models.PositiveIntegerField(
+        default=0
+    )
+
+    c_goals = models.PositiveIntegerField(
+        default=0
+    )
+
+    @property
+    def goal_difference(self):
+        return self.s_goals - self.c_goals
+
 
     def __str__(self):
         return self.eng_name
@@ -32,12 +60,15 @@ class Clubs(models.Model):
             self.slug = slugify(self.eng_name)
         super().save(*args, **kwargs)
 
+
+
 class Player(models.Model):
     name = models.CharField(max_length=100)
-    position = models.CharField(max_length=50)
+    position = models.CharField(max_length=50, choices=PlayerPositionChoices.choices)
     photo = models.URLField()
+    number = models.PositiveIntegerField(default=0)
     eng_name = models.CharField(max_length=100, default='Unknown')
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True, null=True)
     club = models.ForeignKey(Clubs, on_delete=models.CASCADE, related_name='players')
 
     def __str__(self):
@@ -48,7 +79,55 @@ class Player(models.Model):
             self.slug = slugify(self.eng_name)
         super().save(*args, **kwargs)
 
+
 class Matches(models.Model):
-    home_team = models.ForeignKey(Clubs, on_delete=models.CASCADE, related_name='home_matches')
-    away_team = models.ForeignKey(Clubs, on_delete=models.CASCADE, related_name='away_matches')
-    date = models.DateTimeField(default=timezone.now)
+    league = models.ForeignKey(
+        Leagues,
+        on_delete=models.CASCADE,
+        related_name='league',
+        null=True)
+
+    home_team = models.ForeignKey(
+        Clubs,
+        on_delete=models.CASCADE,
+        related_name='home_matches'
+    )
+
+    away_team = models.ForeignKey(
+        Clubs,
+        on_delete=models.CASCADE,
+        related_name='away_matches'
+    )
+
+    date = models.DateTimeField(
+        default=timezone.now
+    )
+
+
+class PlayerStats(models.Model):
+    player = models.OneToOneField(
+        Player,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name='players'
+    )
+
+    played_games = models.PositiveIntegerField(
+        default=0
+    )
+
+    goals = models.PositiveIntegerField(
+        default=0
+    )
+
+    assists = models.PositiveIntegerField(
+        default=0
+    )
+
+    yellow_cards = models.PositiveIntegerField(
+        default=0
+    )
+
+    red_cards = models.PositiveIntegerField(
+        default=0
+    )
