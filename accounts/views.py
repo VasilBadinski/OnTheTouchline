@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model, logout
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, DeleteView, UpdateView
@@ -15,8 +15,7 @@ class ProfileRegisterView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        Profile.objects.create(user=self.object)
-        login(self.request, self.object)
+        self.request.session['new_user_id'] = self.object.pk
         return response
 
 class ProfileCreateView(CreateView):
@@ -25,8 +24,18 @@ class ProfileCreateView(CreateView):
     template_name = 'register_profile.html'
     success_url = reverse_lazy('login')
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated or 'new_user_id' not in request.session:
+            return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        user_id = self.request.session.pop('new_user_id', None)
+        if not user_id:
+            return redirect('login')
+
+        user = UserModel.objects.get(pk=user_id)
+        form.instance.user = user
         return super().form_valid(form)
 
 class ProfileDetailsView(DetailView):
@@ -36,15 +45,15 @@ class ProfileDetailsView(DetailView):
 
 class ProfileDeleteView(DeleteView):
     model = UserModel
+    template_name = 'profile_delete.html'
     success_url = reverse_lazy('home')
 
     def get_object(self, queryset=None):
         return self.request.user
 
     def delete(self, request, *args, **kwargs):
-        user = self.get_object()
-        user.delete()
-        return redirect(self.get_success_url())
+        logout(request)
+        return super().delete(request, *args, **kwargs)
 
 class ProfileEditView(UpdateView):
     model = Profile

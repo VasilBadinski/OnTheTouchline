@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, DeleteView, UpdateView
 from articles.models import Article
 from articles.forms import ArticleCreateForm, ArticleEditForm
@@ -40,9 +40,6 @@ class ArticleEditView(UpdateView):
 
 class ArticleDeleteView(DeleteView):
     model = Article
+    context_object_name = 'article'
+    template_name = 'article_delete.html'
     success_url = reverse_lazy('home')
-
-    def post(self, request, *args, **kwargs):
-        article = get_object_or_404(Article, pk=kwargs['pk'])
-        article.delete()
-        return redirect(self.success_url)

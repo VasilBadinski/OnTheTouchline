@@ -20,9 +20,12 @@
          {% empty %}
          <p>Няма новини за тази лига.</p>
          {% endfor %}
-        {% if user.is_staff %}
+         <div class="button-box">
+         {% if user.is_staff %}
             <a href="{% url 'edit-league' league.slug %}" class="btn-primary">Редактирай</a>
-        {% endif %}
+            <a href="{% url 'delete-league' league.slug %}" onclick="return confirmDelete();" class="btn-primary">Изтрий</a>
+         {% endif %}
+         </div>
       </div>
       <div class="teams-standing">
          <h2 class="teams-title">Класиране</h2>
@@ -38,7 +41,7 @@
             </thead>
             <tbody>
                {% for club in standings %}
-               <tr onclick="window.location.href='{% url 'club' club.slug  %}'">
+               <tr onclick="window.location.href='{% url 'overview' club.slug  %}'">
                      <td>{{ forloop.counter }}</td>
                      <td>
                         <img src="{{ club.logo }}" alt="{{ club.name }}" class="team-logo" style="width: 25px; vertical-align: middle;">

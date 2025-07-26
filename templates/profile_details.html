@@ -31,12 +31,9 @@
                 </button>
             </form>
             {% if not user.is_superuser %}
-            <form method="post" action="{% url 'delete' profile.pk %}">
-                {% csrf_token %}
-                <button type="submit" class="btn-primary">
-                    Изтрий
-                </button>
-            </form>
+            <a href="{% url 'delete' profile.pk %}" class="btn-primary">
+                Изтрий
+            </a>
             {% endif %}
         </div>
     </div>

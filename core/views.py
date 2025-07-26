@@ -1,6 +1,8 @@
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DetailView
+from django.urls import reverse_lazy, reverse
+from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 from articles.models import Article
+from common.mixins import ClubContextMixin
+from core.choices import PlayerPositionChoices
 from core.forms import LeagueAddForm, ClubAddForm, PlayerAddForm, MatchCreateForm, LeagueEditForm, ClubEditForm
 from core.models import Leagues, Clubs, Player, Matches
 
@@ -65,22 +67,6 @@ class ClubPageView(DetailView):
         context = super().get_context_data(**kwargs)
         club = self.get_object()
         context['articles'] = Article.objects.filter(club=club).order_by('-created_at')
-
-        position_labels = {
-            'GK': 'Вратари',
-            'DF': 'Защитници',
-            'MF': 'Халфове',
-            'AT': 'Нападатели',
-        }
-
-        players_by_position = {}
-        for position, label in position_labels.items():
-            players_by_position[position] = {
-                'label': label,
-                'players': club.players.filter(position=position)
-            }
-
-        context['players_by_position'] = players_by_position
         return context
 
 
@@ -107,3 +93,78 @@ class ClubEditView(UpdateView):
             'club',
             kwargs={'slug': self.object.slug}
         )
+
+class OverviewView(ClubContextMixin, DetailView):
+    model = Clubs
+    context_object_name = 'club'
+    template_name = 'overview.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        club = self.get_club()
+
+        context['upcoming_matches'] = self.get_upcoming_matches(club)
+        context['articles'] = self.get_articles(club)[:2]
+        context['stadium'] = getattr(club, 'club', None)
+        return context
+
+
+class MatchView(ClubContextMixin, DetailView):
+    model = Clubs
+    context_object_name = 'club'
+    template_name = 'matches.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        club = self.get_club()
+        context['upcoming_matches'] = self.get_upcoming_matches(club)
+        return context
+
+
+class SquadView(ClubContextMixin, DetailView):
+    model = Clubs
+    context_object_name = 'club'
+    template_name = 'players.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        club = self.get_club()
+
+        context['goalkeepers'] = club.players.filter(position=PlayerPositionChoices.GOALKEEPER)
+        context['defenders'] = club.players.filter(position=PlayerPositionChoices.DEFENDER)
+        context['midfielders'] = club.players.filter(position=PlayerPositionChoices.MIDFIELDER)
+        context['attackers'] = club.players.filter(position=PlayerPositionChoices.ATTACKER)
+
+        return context
+
+
+class ClubNewsView(ClubContextMixin, DetailView):
+    model = Clubs
+    context_object_name = 'club'
+    template_name = 'club_news.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        club = self.get_club()
+
+        context['articles'] = self.get_articles(club)[2:]
+        return context
+
+
+class ClubDeleteView(DeleteView):
+    model = Clubs
+    context_object_name = 'club'
+    template_name = 'club_delete.html'
+
+
+    def get_success_url(self):
+        club = self.get_object()
+        league_slug = club.league.slug
+        return reverse('league', kwargs={'slug': league_slug})
+
+
+class LeagueDeleteView(DeleteView):
+    model = Leagues
+    context_object_name = 'league'
+    template_name = 'league_delete.html'
+    success_url = reverse_lazy('home')

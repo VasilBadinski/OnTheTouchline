@@ -131,3 +131,10 @@ class PlayerStats(models.Model):
     red_cards = models.PositiveIntegerField(
         default=0
     )
+
+class Stadium(models.Model):
+    name = models.CharField(max_length=100, null=True)
+    club = models.OneToOneField(Clubs, on_delete=models.CASCADE, primary_key=True, related_name='club')
+    capacity = models.PositiveIntegerField()
+    opened = models.PositiveIntegerField()
+    city = models.CharField(max_length=50)

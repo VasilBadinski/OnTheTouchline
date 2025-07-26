@@ -123,3 +123,24 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+   const navLinks = document.querySelectorAll(".club-nav ul li a");
+   const currentUrl = window.location.href;
+
+   let activeFound = false;
+
+   navLinks.forEach(link => {
+      if (currentUrl === link.href) {
+         link.parentElement.classList.add("active");
+         activeFound = true;
+      }
+   });
+
+   if (!activeFound) {
+      const overviewLink = document.querySelector('.club-nav ul li a[href$="/overview/"]');
+      if (overviewLink) {
+         window.location.href = overviewLink.href;
+      }
+   }
+});
+

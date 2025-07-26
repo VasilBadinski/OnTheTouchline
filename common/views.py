@@ -1,3 +1,4 @@
+from asgiref.sync import sync_to_async
 from django.http import JsonResponse
 from django.views.generic import ListView
 from articles.models import Article
@@ -21,21 +22,23 @@ class NewsPageView(ListView):
         return Article.objects.all().order_by('-created_at')
 
 
-def clubs_by_league(request):
+async def clubs_by_league(request):
     league_id = request.GET.get('league_id')
     if league_id:
-        clubs = Clubs.objects.filter(league_id=league_id).order_by('eng_name')
+        clubs = await sync_to_async(list)(
+            Clubs.objects.filter(league_id=league_id).order_by('eng_name').values('id', 'eng_name')
+        )
     else:
-        clubs = Clubs.objects.none()
-    clubs_list = list(clubs.values('id', 'eng_name'))
-    return JsonResponse({'clubs': clubs_list})
+        clubs = []
+    return JsonResponse({'clubs': clubs})
 
 
-def players_by_club(request):
+async def players_by_club(request):
     club_id = request.GET.get('club_id')
     if club_id:
-        players = Player.objects.filter(club_id=club_id).order_by('eng_name')
+        players = await sync_to_async(list)(
+            Player.objects.filter(club_id=club_id).order_by('eng_name').values('id', 'eng_name')
+        )
     else:
-        players = Player.objects.none()
-    players_list = list(players.values('id', 'eng_name'))
-    return JsonResponse({'players': players_list})
+        players = []
+    return JsonResponse({'players': players})

@@ -133,7 +133,6 @@
 
 .news-item {
   cursor: pointer;
-  height: 350px;
   margin-bottom: 20px;
 }
 
@@ -148,6 +147,14 @@
 
 .news-image {
   object-fit: cover;
-  margin-left: 10px;
   border-radius: 10px;
+}
+
+.standings-table thead th:nth-child(2),
+.standings-table tbody td:nth-child(2) {
+  width: 40%;
+  max-width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
