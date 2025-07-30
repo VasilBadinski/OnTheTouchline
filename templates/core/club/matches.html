@@ -1,0 +1,26 @@
+{% extends 'core/club/team.html' %}
+
+{% block small_content %}
+<div class="team-matches-container">
+    {% for match in upcoming_matches %}
+        <a href="{% url 'match' match.slug %}" class="team-match-card-link">
+            <div class="team-match-card">
+                <div class="team-match-date">{{ match.date|date:"d.m.Y" }}</div>
+                <div class="team-match-teams">
+                    <div class="team-match-team home">
+                        <img src="{{ match.home_team.logo }}" alt="{{ match.home_team.name }}" class="team-match-logo">
+                        <span class="team-match-name">{{ match.home_team.name }}</span>
+                    </div>
+                    <div class="team-match-time">{{ match.date|date:"H:i" }}</div>
+                    <div class="team-match-team away">
+                        <span class="team-match-name">{{ match.away_team.name }}</span>
+                        <img src="{{ match.away_team.logo }}" alt="{{ match.away_team.name }}" class="team-match-logo">
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% empty %}
+        <p class="team-match-empty">Няма предстоящи мачове.</p>
+    {% endfor %}
+</div>
+{% endblock %}

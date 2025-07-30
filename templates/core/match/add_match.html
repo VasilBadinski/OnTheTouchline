@@ -1,0 +1,37 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}OnTheTouchline | Add Match{% endblock %}
+
+{% block content %}
+<main class="page-center">
+    <section class="article-create-container">
+        <h2>Добавяне на мач</h2>
+        <form method="post" class="article-create-form">
+            {% csrf_token %}
+            {{ form.league }}
+            {% if form.league.errors %}
+                <p class="form-error">{{ form.league.errors }}</p>
+            {% endif %}
+
+            {{ form.home_team }}
+            {% if form.home_team.errors %}
+                <p class="form-error">{{ form.home_team.errors }}</p>
+            {% endif %}
+
+            {{ form.away_team }}
+            {% if form.away_team.errors %}
+                <p class="form-error">{{ form.away_team.errors }}</p>
+            {% endif %}
+
+            {{ form.date }}
+            {% if form.date.errors %}
+                <p class="form-error">{{ form.date.errors }}</p>
+            {% endif %}
+
+            <button type="submit" class="btn-primary">Създай мач</button>
+        </form>
+    </section>
+</main>
+
+{% endblock %}

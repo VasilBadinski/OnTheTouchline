@@ -1,0 +1,33 @@
+{% extends 'common/base.html' %}
+
+{% block title %}OnTheTouchline | {{ article.title }}{% endblock %}
+
+{% block content %}
+<div class="page-centers">
+    <div class="article-detail-container">
+
+        <div class="article-image">
+            <img src="{{ article.imageURL }}" alt="{{ article.title }}" class="article-img" />
+        </div>
+
+        <h1 class="article-title">{{ article.title }}</h1>
+
+        <div class="article-description">
+            <p>{{ article.description }}</p>
+        </div>
+
+        <div class="article-meta">
+            <div class="article-meta-info">
+                  <p>Автор: {{ article.author.username }}</p>
+                  <p>Публикувана на: {{ article.created_at|date:"d.m.Y H:i" }}</p>
+            </div>
+            {% if user.is_staff %}
+            <div class="article-meta-buttons">
+                <a href="{% url 'article-edit' article.slug %}" class="btn-primary">Редактирай</a>
+                <a href="{% url 'article-delete' article.slug %}" class="btn-primary">Изтрий</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

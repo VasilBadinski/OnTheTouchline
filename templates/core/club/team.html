@@ -1,0 +1,27 @@
+{% extends 'common/base.html' %}
+
+{% block title %}OnTheTouchline | {{ club.eng_name }}{% endblock %}
+
+{% block content %}
+<div class="league-page">
+   <div class="league-header horizontal">
+      <img src="{{ club.logo }}" alt="{{ club.eng_name }}" class="league-image" />
+      <h1 class="league-name">{{ club.name }}</h1>
+   </div>
+
+   <nav class="club-nav">
+      <ul>
+         <li><a href="{% url 'overview' club.slug %}">Обзор</a></li>
+         <li><a href="{% url 'matches' club.slug %}">Мачове</a></li>
+         <li><a href="{% url 'squad' club.slug %}">Играчи</a></li>
+         <li><a href="{% url 'club-news' club.slug %}">Новини</a></li>
+      </ul>
+   </nav>
+   {% block small_content %}
+   {% endblock %}
+    {% if user.is_staff %}
+        <a href="{% url 'edit-club' club.slug %}" class="btn-primary">Редактирай</a>
+        <a href="{% url 'delete-club' club.slug %}" class="btn-primary">Изтрий</a>
+    {% endif %}
+</div>
+{% endblock %}

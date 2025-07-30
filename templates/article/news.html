@@ -1,0 +1,24 @@
+{% extends 'common/base.html' %}
+
+{% block title %}OnTheTouchline | News{% endblock %}
+
+{% block content %}
+<div class="news-list-container">
+    {% for article in articles %}
+    <a href="{% url 'article-detail' slug=article.slug %}" class="news-link">
+        <div class="news-item">
+            <div class="news-image">
+                <img src="{{ article.imageURL }}" alt="{{ article.title }}">
+            </div>
+            <div class="news-content">
+                <h2 class="news-title">{{ article.title|truncatewords:10 }}</h2>
+                <p class="news-description">{{ article.description|truncatechars:100 }}</p>
+                <p class="news-meta">{{ article.created_at|date:"d.m.Y H:i" }}</p>
+            </div>
+        </div>
+    </a>
+    {% empty %}
+        <p>Няма налични новини.</p>
+    {% endfor %}
+</div>
+{% endblock %}

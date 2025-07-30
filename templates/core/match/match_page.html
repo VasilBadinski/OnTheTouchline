@@ -1,0 +1,68 @@
+{% extends 'common/base.html' %}
+
+{% block title %}OnTheTouchline | {{ match.slug }}{% endblock %}
+
+{% block content %}
+<div class="page-center1">
+   <div class="content-wrapper-outer">
+      <div class="matchcard-card">
+         <div class="matchcard-date-topright">
+            {{ match.date|date:"d.m.Y" }}
+         </div>
+         <div class="matchcard-teams">
+             <div class="matchcard-team matchcard-home">
+               <img src="{{ match.home_team.logo }}" alt="{{ match.home_team.name }}" class="matchcard-mini-logo">
+               <a href="{% url 'overview' match.home_team.slug %}">{{ match.home_team.name }}</a>
+            </div>
+            <div class="matchcard-match-time">
+               {{ match.date|date:"H:i" }}
+            </div>
+            <div class="matchcard-team matchcard-away">
+               <a href="{% url 'overview' match.away_team.slug %}">{{ match.away_team.name }}</a>
+               <img src="{{ match.away_team.logo }}" alt="{{ match.away_team.name }}" class="matchcard-mini-logo">
+            </div>
+         </div>
+      </div>
+      {% if standings %}
+      <div class="standings-section">
+         <h2 class="standings-title">Класиране</h2>
+         <table class="standings-table">
+            <thead>
+               <tr>
+                  <th>#</th>
+                  <th>Отбор</th>
+                  <th>М</th>
+                  <th>ГР</th>
+                  <th>Т</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for team in standings %}
+               <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>
+                     <a href="{% url 'overview' team.slug %}">
+                       <img src="{{ team.logo }}" alt="{{ team.name }}" class="team-logo">
+                       {{ team.name }}
+                     </a>
+                  </td>
+                  <td>{{ team.played }}</td>
+                  <td>{{ team.goal_difference }}</td>
+                  <td>{{ team.points }}</td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+      {% else %}
+      <p class="empty-standings">Няма данни за класиране.</p>
+      {% endif %}
+      <div class="article-meta-buttons">
+      {% if user.is_staff %}
+          <a href="{% url 'edit-match' match.slug %}" class="btn-primary">Редактирай</a>
+          <a href="{% url 'delete-match' match.slug %}" class="btn-primary">Изтрий</a>
+      {% endif %}
+      </div>
+   </div>
+</div>
+{% endblock %}

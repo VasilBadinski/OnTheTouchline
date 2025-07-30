@@ -1,0 +1,32 @@
+{% extends 'common/base.html' %}
+{% load placeholder_filter %}
+
+{% block title %}OnTheTouchline | Register Account{% endblock %}
+
+{% block content %}
+<div class="page-center">
+    <div class="article-create-container">
+        <h2>Регистрация</h2>
+        <form method="post" enctype="multipart/form-data" class="article-create-form">
+            {% csrf_token %}
+
+            {{ form.username|placeholder:"Username" }}
+            {% if form.username.errors %}
+                <div class="form-error">{{ form.username.errors }}</div>
+            {% endif %}
+
+            {{ form.date_of_birth|placeholder:"Date of birth" }}
+            {% if form.date_of_birth.errors %}
+                <div class="form-error">{{ form.date_of_birth.errors }}</div>
+            {% endif %}
+
+            {{ form.profile_picture }}
+            {% if form.profile_picture.errors %}
+                <div class="form-error">{{ form.profile_picture.errors }}</div>
+            {% endif %}
+
+            <button type="submit" class="btn-primary">Регистриране</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

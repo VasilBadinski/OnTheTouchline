@@ -1,0 +1,22 @@
+{% extends 'common/base.html' %}
+
+{% block title %}OnTheTouchline | Edit Profile{% endblock %}
+
+{% block content %}
+<div class="page-center">
+    <div class="article-create-container">
+        <h2>Редактирай</h2>
+        <form method="post" enctype="multipart/form-data" class="article-create-form">
+            {% csrf_token %}
+            {% for field in form %}
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="form-error">{{ field.errors|striptags }}</div>
+                {% endif %}
+            {% endfor %}
+            <button type="submit" class="btn-primary">Запази промените</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

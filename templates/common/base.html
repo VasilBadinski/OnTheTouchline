@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Vasil Badinski" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="icon" href="{% static 'images/free.ico' %}"/>
+    <title>{% block title %}OnTheTouchline | Home{% endblock %}</title>
+</head>
+<body>
+    <div class="layout-wrapper">
+        <header>
+            <div class="header-inner">
+                <a href="javascript:void(0)" class="x-button" onclick="openNav()">
+                    <img src="{% static 'images/main-menu.png' %}" alt="меню" class="menu">
+                </a>
+                <a href="{% url 'home' %}" class="logo">
+                    <img src="{% static 'images/freepik.png' %}" alt="лого"/>
+                </a>
+            </div>
+
+            <nav id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="{% url 'home' %}">Начало</a>
+                <a href="javascript:void(0);" onclick="toggleLeagueMenu()">Първенства</a>
+                <div id="league-submenu" class="league-submenu">
+                    {% for league in leagues %}
+                        <a href="{% url 'league' league.slug %}"><img src="{{ league.logo }}" alt="logo" class="small-logo"/>{{ league.name }}</a>
+                    {% empty %}
+                        <p class="empty-league">Няма добавени първенства.</p>
+                    {% endfor %}
+                </div>
+                <a href="{% url 'news' %}">Новини</a>
+                <a href="/this-page-does-not-exist/">Игри</a>
+                {% if user.is_staff %}
+                    <hr class="menu-separator">
+                    <a href="{% url 'article-create' %}">Добави новина</a>
+                    <a href="{% url 'add-league' %}">Добави лига</a>
+                    <a href="{% url 'add-club' %}">Добави клуб</a>
+                    <a href="{% url 'add-player' %}">Добави играч</a>
+                    <a href="{% url 'add-matches' %}">Добави мач</a>
+                {% endif %}
+            </nav>
+
+            {% if not request.user.is_authenticated %}
+                <div class="auth-links">
+                    <a href="{% url 'login' %}" class="login">
+                        <span>Вход</span>
+                    </a>
+                    <a href="{% url 'register' %}" class="register">
+                        <span>Регистриране</span>
+                    </a>
+                </div>
+            {% else %}
+                <a href="{% url 'detail-profile' user.pk %}" class="login user-link">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture }}" alt="потребител">
+                    {% else %}
+                        <img src="{% static 'images/user-interface.png' %}" alt="потребител">
+                    {% endif %}
+                </a>
+            {% endif %}
+        </header>
+
+        <main class="layout-content">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer>
+            <div class="footer-container">
+                <nav class="footer-nav">
+                    <a href="#">Политика за поверителност</a>
+                    <a href="#">Условия за ползване</a>
+                    <a href="#">Свържи се с нас</a>
+                    <a href="#">Социални мрежи</a>
+                </nav>
+                <p>© 2025 <strong>OnTheTouchline</strong>. Всички права запазени.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{% static 'js/functions.js' %}"></script>
+</body>
+</html>

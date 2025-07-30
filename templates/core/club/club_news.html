@@ -1,0 +1,21 @@
+{% extends 'core/club/team.html' %}
+
+{% block small_content %}
+<div class="news-wrapper">
+  <div class="news-grid">
+    {% for article in articles %}
+      <a href="{% url 'article-detail' article.slug %}" class="news-card-link">
+        <div class="news-card">
+          <img src="{{ article.imageURL }}" alt="{{ article.title }}">
+          <div class="news-content">
+            <h3>{{ article.title|truncatewords:5 }}</h3>
+            <p class="news-source">{{ article.created_at|timesince }} ago</p>
+          </div>
+        </div>
+      </a>
+    {% empty %}
+      <p>No news available for this club.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

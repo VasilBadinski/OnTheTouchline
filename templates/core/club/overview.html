@@ -1,0 +1,76 @@
+{% extends 'core/club/team.html' %}
+
+{% load static %}
+
+{% block small_content %}
+<div class="league-content">
+    <div class="main-sections">
+        <div class="news-section">
+            <h2>Новини</h2>
+            {% for article in articles|slice:':2' %}
+                <div class="news-item">
+                    <a href="{% url 'article-detail' article.slug %}">
+                        <h3>{{ article.title|truncatewords:5 }}</h3>
+                        <img src="{{ article.imageURL }}" alt="i-article" class="news-image">
+                    </a>
+                    <p>{{ article.description|truncatewords:30 }}</p>
+                </div>
+            {% empty %}
+                <p>Няма новини за този отбор.</p>
+            {% endfor %}
+        </div>
+
+        <div class="right-section">
+            <div class="match-cards">
+                {% for match in upcoming_matches %}
+                    <a href="#" class="match-card-link">
+                        <div class="match-card">
+                            <div class="match-date">{{ match.date|date:"d.m.Y" }}</div>
+                            <div class="match-teams">
+                                <div class="team home">
+                                    <img src="{{ match.home_team.logo }}" alt="{{ match.home_team.name }}" class="mini-logo">
+                                    <span>{{ match.home_team.name }}</span>
+                                </div>
+                                <div class="match-time">{{ match.date|date:"H:i" }}</div>
+                                <div class="team away">
+                                    <span>{{ match.away_team.name }}</span>
+                                    <img src="{{ match.away_team.logo }}" alt="{{ match.away_team.name }}" class="mini-logo">
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="empty-league">Няма предстоящи мачове.</p>
+                {% endfor %}
+            </div>
+
+            {% if stadium %}
+            <div class="stadium-card">
+              <h2 class="stadium-title">Стадион</h2>
+
+              <div class="stadium-header">
+                <img src="{% static 'images/icons8-stadium-48 (1).png' %}" alt="Stadium Icon" class="stadium-icon">
+                <div class="stadium-name-block">
+                  <div class="stadium-name">{{ club.club.name }}</div>
+                  <div class="stadium-city">{{ club.club.city }}</div>
+                </div>
+              </div>
+
+              <div class="stadium-divider"></div>
+
+              <div class="stadium-details">
+                <div class="stadium-detail">
+                  <div class="detail-value">{{ club.club.capacity }}</div>
+                  <div class="detail-label">Капацитет</div>
+                </div>
+                <div class="stadium-detail">
+                  <div class="detail-value">{{ club.club.opened }}</div>
+                  <div class="detail-label">Отворен</div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

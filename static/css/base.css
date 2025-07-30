@@ -1,0 +1,235 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #0a0a0a;
+  font-family: Arial, sans-serif;
+  color: #eee;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-content {
+  flex: 1;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background-color: #151414;
+  color: white;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  box-sizing: border-box;
+  border-bottom: 10px solid #b00020;
+  padding-left: 10px;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  width: 25px;
+  height: auto;
+  cursor: pointer;
+}
+
+.logo {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo img {
+  width: 30px;
+  height: auto;
+}
+
+.logo-text {
+  margin-left: 3px;
+  color: white;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1100;
+  top: 0;
+  left: 0;
+  background-color: #151414;
+  overflow-x: hidden;
+  transition: width 0.5s;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav .closebtn {
+  font-size: 36px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 18px 12px;
+  height: 60px;
+  line-height: 20px;
+  align-self: flex-start;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav a.active {
+  color: #ff3333;
+  font-weight: bold;
+}
+
+.auth-links {
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.auth-links .login,
+.auth-links .register {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.auth-links .login:hover,
+.auth-links .register:hover {
+  background-color: #b00020;
+}
+
+.login img {
+  width: 24px;
+  height: 24px;
+}
+
+footer {
+  background-color: #151414;
+  color: white;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.footer-container p {
+  margin: 0;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.user-link {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+  gap: 10px;
+  text-decoration: none;
+  margin-left: auto;
+}
+
+.user-link img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.menu-separator {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 20px;
+  height: 1px;
+  background-color: transparent;
+}
+
+.league-submenu {
+    display: none;
+    flex-direction: column;
+    padding: 10px 15px;
+    margin-left: 10px;
+}
+
+.league-submenu a {
+    color: #818181;
+    padding: 6px 0 0 10px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    font-size: 17px;
+}
+
+.league-submenu a:hover {
+    color: white;
+}
+
+.empty-league {
+    color: #aaa;
+    font-size: 0.9rem;
+    padding: 5px;
+}
+
+.small-logo {
+  padding-right: 5px;
+  width: 15px;
+  height: auto;
+}

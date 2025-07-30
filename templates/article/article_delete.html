@@ -1,0 +1,14 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div class="confirm-delete-wrapper">
+    <div class="confirm-delete-box">
+        <h2 class="confirm-delete-title">Искаш ли да изтриеш статията?</h2>
+        <form method="post" class="confirm-delete-form">
+            {% csrf_token %}
+            <button type="submit" class="confirm-delete-button confirm-delete-yes">Да, изтрий</button>
+            <a href="{% url 'home' %}" class="confirm-delete-button confirm-delete-cancel">Отмени</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'common/base.html' %}
+
+{% block title %}OnTheTouchline | Add Club{% endblock %}
+
+{% load placeholder_filter %}
+
+{% block content %}
+<div class="page-center">
+    <div class="article-create-container">
+        <h2>Добавяна на клуб</h2>
+        <form method="post" class="article-create-form">
+            {% csrf_token %}
+
+            {{ form.name|placeholder:"Име" }}
+            {% if form.name.errors %}
+                <div class="form-error">{{ form.name.errors }}</div>
+            {% endif %}
+
+            {{ form.logo|placeholder:"Лого" }}
+            {% if form.logo.errors %}
+                <div class="form-error">{{ form.logo.errors }}</div>
+            {% endif %}
+
+            {{ form.eng_name|placeholder:"Име на английски" }}
+            {% if form.eng_name.errors %}
+                <div class="form-error">{{ form.eng_name.errors }}</div>
+            {% endif %}
+
+            {{ form.league}}
+            {% if form.league.errors %}
+                <div class="form-error">{{ form.league.errors }}</div>
+            {% endif %}
+
+            <button type="submit" class="btn-primary">Добави клуб</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

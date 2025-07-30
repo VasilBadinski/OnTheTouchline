@@ -1,0 +1,41 @@
+{% extends 'common/base.html' %}
+{% load static %}
+
+{% block title %}OnTheTouchline | Profile{% endblock %}
+
+{% block content %}
+<div class="prof-box">
+    <div class="profile-card">
+        <h1 class="profile-heading">Профил</h1>
+        {% if profile.profile_picture %}
+            <img src="{{ profile.profile_picture }}" alt="Профилна снимка" class="profile-image">
+        {% else %}
+            <img src="{% static 'images/default-profile.jpg' %}" alt="Профилна снимка" class="profile-image">
+        {% endif %}
+        <div class="profile-info">
+            <h2>Име: {{ profile.username }}</h2>
+
+            {% if profile.date_of_birth %}
+                <p><strong>Дата на раждане:</strong> {{ profile.date_of_birth|date:"d/m/Y" }}</p>
+            {% endif %}
+
+            <p><strong>Email:</strong> {{ profile.user.email }}</p>
+        </div>
+        <div class="profile-buttons">
+            <a href="{% url 'edit' profile.pk %}" class="btn-primary">Редактирай</a>
+
+            <form method="post" action="{% url 'logout'%}">
+                {% csrf_token %}
+                <button type="submit" class="btn-primary">
+                    Изход
+                </button>
+            </form>
+            {% if not user.is_superuser %}
+            <a href="{% url 'delete' profile.pk %}" class="btn-primary">
+                Изтрий
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

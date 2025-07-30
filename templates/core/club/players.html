@@ -1,0 +1,53 @@
+{% extends 'core/club/team.html' %}
+
+{% block small_content %}
+<div class="squad-wrapper">
+    <h2>Goalkeepers</h2>
+    <div class="squad-list">
+        {% for player in goalkeepers %}
+        <a href="{% url 'player' player.slug %}" class="player-card">
+            <img src="{{ player.photo }}" alt="{{ player.name }}">
+            <p>#{{ player.number }} {{ player.name }}</p>
+        </a>
+        {% empty %}
+        <p>No goalkeepers in squad.</p>
+        {% endfor %}
+    </div>
+
+    <h2>Defenders</h2>
+    <div class="squad-list">
+        {% for player in defenders %}
+        <a href="{% url 'player' player.slug %}" class="player-card">
+            <img src="{{ player.photo }}" alt="{{ player.name }}">
+            <p>#{{ player.number }} {{ player.name }}</p>
+        </a>
+        {% empty %}
+        <p>No defenders in squad.</p>
+        {% endfor %}
+    </div>
+
+    <h2>Midfielders</h2>
+    <div class="squad-list">
+        {% for player in midfielders %}
+        <a href="{% url 'player' player.slug %}" class="player-card">
+            <img src="{{ player.photo }}" alt="{{ player.name }}">
+            <p>#{{ player.number }} {{ player.name }}</p>
+        </a>
+        {% empty %}
+        <p>No midfielders in squad.</p>
+        {% endfor %}
+    </div>
+
+    <h2>Attackers</h2>
+    <div class="squad-list">
+        {% for player in attackers %}
+        <a href="{% url 'player' player.slug %}" class="player-card">
+            <img src="{{ player.photo }}" alt="{{ player.name }}">
+            <p>#{{ player.number }} {{ player.name }}</p>
+        </a>
+        {% empty %}
+        <p>No attackers in squad.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
