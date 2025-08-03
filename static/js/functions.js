@@ -97,24 +97,24 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`/ajax/get-clubs/?league_id=${leagueId}`)
       .then(response => response.json())
       .then(data => {
-        // Clear existing options
+
         homeTeamSelect.innerHTML = '';
         awayTeamSelect.innerHTML = '';
 
-        // Add default empty option
+
         const defaultOption = document.createElement('option');
         defaultOption.value = '';
         defaultOption.text = '';
         homeTeamSelect.appendChild(defaultOption.cloneNode(true));
         awayTeamSelect.appendChild(defaultOption.cloneNode(true));
 
-        // Populate both selects with clubs
+
         data.clubs.forEach(club => {
           const option1 = document.createElement('option');
           option1.value = club.id;
           option1.text = club.eng_name;
 
-          const option2 = option1.cloneNode(true);  // Clone for away team
+          const option2 = option1.cloneNode(true);
 
           homeTeamSelect.appendChild(option1);
           awayTeamSelect.appendChild(option2);
@@ -144,3 +144,39 @@ document.addEventListener("DOMContentLoaded", function () {
    }
 });
 
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const questions = document.querySelectorAll('.question-block');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+
+    if (questions.length === 0 || !prevBtn || !nextBtn || !submitBtn) {
+        return;
+    }
+
+    let current = 0;
+
+    function showStep(index) {
+        questions.forEach((q, i) => {
+            q.style.display = i === index ? 'block' : 'none';
+        });
+
+        prevBtn.style.display = index > 0 ? 'inline-block' : 'none';
+        nextBtn.style.display = index < questions.length - 1 ? 'inline-block' : 'none';
+        submitBtn.style.display = index === questions.length - 1 ? 'inline-block' : 'none';
+    }
+
+    prevBtn.addEventListener('click', () => {
+        if (current > 0) current--;
+        showStep(current);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (current < questions.length - 1) current++;
+        showStep(current);
+    });
+
+    showStep(0);
+});

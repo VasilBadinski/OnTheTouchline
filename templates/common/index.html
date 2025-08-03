@@ -13,7 +13,7 @@
                 <section class="main-article" id="mainArticle">
                     <a href="{% url 'article-detail' slug=articles.0.slug %}">
                         <h2>{{ articles.0.title|truncatewords:5 }}</h2>
-                        <p class="article-des">{{ articles.0.description|truncatewords:20 }}</p>
+                        <p class="article-des">{{ articles.0.description|truncatewords:50 }}</p>
                         <img src="{{ articles.0.imageURL }}" alt="{{ articles.0.title }}" class="main-image">
                     </a>
                 </section>
@@ -26,6 +26,7 @@
                              data-title="{{ article.title }}"
                              data-description="{{ article.description }}">
                             <h2>{{ article.title|truncatewords:3 }}</h2>
+                            <p>{{ article.description|truncatewords:5 }}</p>
                             <img src="{{ article.imageURL }}" alt="{{ article.title }}" class="sidebar-image">
                         </div>
                     </a>

@@ -15,7 +15,7 @@
                <h3>{{ article.title|truncatewords:5 }}</h3>
                <img src="{{ article.imageURL }}" alt="i-article" class="news-image">
             </a>
-            <p>{{ article.description|truncatewords:30 }}</p>
+            <p>{{ article.description|truncatewords:20 }}</p>
          </div>
          {% empty %}
          <p>Няма новини за тази лига.</p>

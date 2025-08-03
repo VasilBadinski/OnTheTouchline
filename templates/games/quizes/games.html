@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+
+{% block title %}OnTheTouchline | Quizes{% endblock %}
+
+{% block content %}
+<div class="quizzes-page">
+  <div class="quiz-header">
+    <h2 class="quiz-title-header">КУИЗОВЕ</h2>
+  </div>
+
+  <div class="quiz-list-container">
+    {% for quiz in quizes %}
+      <a href="{% url 'quiz' quiz.slug %}" class="quiz-link">
+        <div class="quiz-item">
+          <div class="quiz-image">
+            <img src="{{ quiz.image }}" alt="{{ quiz.title }}">
+          </div>
+          <div class="quiz-content">
+            <h2 class="quiz-title">{{ quiz.title }}</h2>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

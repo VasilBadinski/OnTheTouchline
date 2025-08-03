@@ -1,0 +1,23 @@
+{% extends 'common/base.html' %}
+
+{% load placeholder_filter %}
+
+{% block content %}
+<div class="page-center">
+    <div class="article-create-container">
+        <h2>Свържете се с нас</h2>
+        <form method="post" class="article-create-form">
+            {% csrf_token %}
+            {{ form.email|placeholder:'Имейл' }}
+            {% if form.email.errors %}
+                <div class="form-error">{{ form.email.errors }}</div>
+            {% endif %}
+            {{ form.message|placeholder:'Съобщение' }}
+            {% if form.message.errors %}
+                <div class="form-error">{{ form.message.errors }}</div>
+            {% endif %}
+            <button type="submit" class="btn-primary">Изпрати</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'common/base.html' %}
+
+{% load static %}
+
+{% block title %}OnTheTouchline | Games{% endblock %}
+
+{% block content %}
+<div class="quizzes-page">
+{% if user.is_authenticated %}
+  <div class="quiz-header">
+    <h2 class="quiz-title-header">ИГРИ</h2>
+  </div>
+
+  <div class="extra-articles">
+    <a href="{% url 'quizes' %}" class="extra-article-link">
+      <div class="extra-article">
+        <img src="{% static 'images/stadium.jpg' %}" alt="Quiz 1" class="extra-image" />
+        <div class="extra-text">
+          <h2>Футболни Куизове</h2>
+          <p>Тествайте футболните си знания с нашите въпроси.</p>
+        </div>
+      </div>
+    </a>
+  </div>
+{% else %}
+    <div class="games-access-section">
+      <h2 class="games-access-title">Моля, влезте в акаунта си, за да получите достъп до игрите.</h2>
+      <div class="games-auth-buttons">
+        <a href="{% url 'login' %}" class="games-auth-btn">Вход</a>
+        <a href="{% url 'register' %}" class="games-auth-btn">Регистрация</a>
+      </div>
+    </div>
+{% endif %}
+</div>
+{% endblock %}

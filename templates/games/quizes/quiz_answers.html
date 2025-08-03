@@ -1,0 +1,49 @@
+{% extends 'common/base.html' %}
+
+{% block title %}OnTheTouchline | {{ quiz.eng_title }} Results{% endblock %}
+
+{% block content %}
+<main class="quiz-results-page">
+  <section class="quiz-results-container">
+    <h2>{{ quiz.title }} - Резултат</h2>
+
+    <p>
+      Отговори правилно на {{ correct_count }} от {{ total_questions }} въпроси.
+    </p>
+
+    <p class="quiz-score">
+      Точки: {{ score|floatformat:2 }}%
+    </p>
+
+    <a href="{% url 'quiz' quiz.slug %}" class="btn-primary results-btn">
+      Опитай отново
+    </a>
+  </section>
+
+  <section class="quiz-leaderboard-container">
+    <h2 class="quiz-leaderboard-title">Таблица с резултати</h2>
+    <table class="quiz-leaderboard-table">
+      <thead>
+        <tr>
+          <th>Позиция</th>
+          <th>Играч</th>
+          <th>Точки</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for attempt in leaderboard %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ attempt.profile.username }}</td>
+            <td>{{ attempt.score|floatformat:2 }}%</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="3">Все още няма резултати.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</main>
+{% endblock %}

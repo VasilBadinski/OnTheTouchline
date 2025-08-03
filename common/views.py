@@ -2,8 +2,10 @@ from collections import defaultdict
 from asgiref.sync import sync_to_async
 from django.http import JsonResponse
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, FormView
 from articles.models import Article
+from common.forms import ContactMessageForm
 from core.models import Clubs, Player, Matches
 
 
@@ -26,6 +28,24 @@ class HomePage(ListView):
 
         context['grouped_matches'] = dict(grouped)
         return context
+
+
+class ContactMessageCreateView(FormView):
+    template_name = 'common/contact_us.html'
+    form_class = ContactMessageForm
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+def privacy_policy(request):
+    return render(request, 'common/privacy_policy.html')
+
+def terms_of_use(request):
+    return render(request, 'common/terms_of_service.html')
+
 
 class NewsPageView(ListView):
     model = Article

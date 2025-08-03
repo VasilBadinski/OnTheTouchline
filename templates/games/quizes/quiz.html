@@ -1,0 +1,43 @@
+{% extends 'common/base.html' %}
+
+{% block title %}OnTheTouchline | {{ quiz.eng_title }}{% endblock %}
+
+{% block content %}
+  <div class="page-center1">
+    <div class="article-create-container">
+      <h2>{{ quiz.title }}</h2>
+
+      <form method="post" action="{% url 'quiz-answers' quiz.slug %}" class="article-create-form">
+        {% csrf_token %}
+
+        {% for question in quiz.questions.all %}
+          <fieldset>
+            <legend>{{ forloop.counter }}. {{ question.text }}</legend>
+
+            <label>
+              <input type="radio" name="question_{{ question.pk }}" value="A" required>
+              <span>А) {{ question.option_a }}</span>
+            </label>
+
+            <label>
+              <input type="radio" name="question_{{ question.pk }}" value="B">
+              <span>Б) {{ question.option_b }}</span>
+            </label>
+
+            <label>
+              <input type="radio" name="question_{{ question.pk }}" value="C">
+              <span>В) {{ question.option_c }}</span>
+            </label>
+
+            <label>
+              <input type="radio" name="question_{{ question.pk }}" value="D">
+              <span>Г) {{ question.option_d }}</span>
+            </label>
+          </fieldset>
+        {% endfor %}
+
+        <button type="submit" class="btn-primary">Oтговори</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

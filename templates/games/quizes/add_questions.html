@@ -1,0 +1,58 @@
+{% extends 'common/base.html' %}
+
+{% block title %}OnTheTouchline | Add Questions{% endblock %}
+
+{% load placeholder_filter %}
+
+{% block content %}
+<div class="page-center">
+    <div class="article-create-container">
+        <h2>Добавяне на въпроси</h2>
+        <form method="post" class="article-create-form" id="questionForm">
+            {% csrf_token %}
+
+            {% for i in question_range %}
+            <div class="question-block" style="display: none;">
+                <h4>Въпрос {{ forloop.counter }}</h4>
+
+                <label>Текст на въпроса:
+                    <input type="text" name="question_{{ forloop.counter }}" placeholder="Текст на въпроса" required>
+                </label>
+
+                <label>Отговор A:
+                    <input type="text" name="a_{{ forloop.counter }}" placeholder="Отговор A" required>
+                </label>
+
+                <label>Отговор B:
+                    <input type="text" name="b_{{ forloop.counter }}" placeholder="Отговор B" required>
+                </label>
+
+                <label>Отговор C:
+                    <input type="text" name="c_{{ forloop.counter }}" placeholder="Отговор C" required>
+                </label>
+
+                <label>Отговор D:
+                    <input type="text" name="d_{{ forloop.counter }}" placeholder="Отговор D" required>
+                </label>
+
+                <label>Правилен отговор:
+                    <select name="correct_{{ forloop.counter }}" required>
+                        <option value="" disabled selected>Изберете</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </label>
+            </div>
+            {% endfor %}
+
+            <div class="form-navigation">
+                <button type="button" id="prevBtn" class="btn-primary" style="display: none;">Назад</button>
+                <button type="button" id="nextBtn" class="btn-primary">Следващ</button>
+                <button type="submit" id="submitBtn" class="btn-primary" style="display: none;">Добави въпроси</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
