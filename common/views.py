@@ -4,9 +4,12 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, FormView
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from articles.models import Article
 from common.forms import ContactMessageForm
-from core.models import Clubs, Player, Matches
+from common.serializers import PlayerSerializer, LeagueSerializer, ClubSerializer
+from core.models import Clubs, Player, Matches, Leagues
 
 
 class HomePage(ListView):
@@ -56,6 +59,23 @@ class NewsPageView(ListView):
         return Article.objects.all().order_by('-created_at')
 
 
+class SearchAPIView(APIView):
+    def get(self, request):
+        query = request.GET.get('q', '').strip()
+        if not query:
+            return Response({'players': [], 'leagues': [], 'clubs': []})
+
+        players = Player.objects.filter(name__icontains=query)[:5]
+        leagues = Leagues.objects.filter(name__icontains=query)[:5]
+        clubs = Clubs.objects.filter(name__icontains=query)[:5]
+
+        return Response({
+            'players': PlayerSerializer(players, many=True).data,
+            'leagues': LeagueSerializer(leagues, many=True).data,
+            'clubs': ClubSerializer(clubs, many=True).data,
+        })
+
+
 async def clubs_by_league(request):
     league_id = request.GET.get('league_id')
     if league_id:
@@ -76,3 +96,4 @@ async def players_by_club(request):
     else:
         players = []
     return JsonResponse({'players': players})
+

@@ -180,3 +180,79 @@ document.addEventListener('DOMContentLoaded', () => {
 
     showStep(0);
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('search-input');
+  const resultsDiv = document.getElementById('search-results');
+
+  let controller = null;
+
+  searchInput.addEventListener('input', async function () {
+    const query = this.value.trim();
+
+    if (controller) controller.abort();
+    controller = new AbortController();
+    const { signal } = controller;
+
+    if (query.length === 0) {
+      resultsDiv.innerHTML = '';
+      resultsDiv.style.display = 'none';
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/search/?q=${encodeURIComponent(query)}`, { signal });
+      if (!response.ok) throw new Error('Network error');
+      const data = await response.json();
+
+      renderResults(data);
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        console.error(err);
+        resultsDiv.innerHTML = '<p>Error loading results.</p>';
+        resultsDiv.style.display = 'block';
+      }
+    }
+  });
+
+  function renderResults(data) {
+      const players = data.players.map(p => `<a href="/players/${p.slug}/" class="result-item">👤 ${p.name}</a>`).join('');
+      const leagues = data.leagues.map(l => `<a href="/leagues/${l.slug}/" class="result-item">🏆 ${l.name}</a>`).join('');
+      const clubs = data.clubs.map(c => `<a href="/clubs/${c.slug}/" class="result-item">⚽ ${c.name}</a>`).join('');
+
+      if (!players && !leagues && !clubs) {
+        resultsDiv.innerHTML = '<p class="no-results">No results found.</p>';
+      } else {
+        resultsDiv.innerHTML = `
+          ${players}
+          ${leagues}
+          ${clubs}
+        `;
+      }
+
+      resultsDiv.style.display = 'block';
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!searchInput.contains(e.target) && !resultsDiv.contains(e.target)) {
+      resultsDiv.style.display = 'none';
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('search-input');
+  const clearIcon = document.getElementById('clear-icon');
+
+  searchInput.addEventListener('input', function () {
+    clearIcon.style.display = this.value ? 'block' : 'none';
+  });
+
+  clearIcon.addEventListener('click', function () {
+    searchInput.value = '';
+    searchInput.focus();
+    clearIcon.style.display = 'none';
+    document.getElementById('search-results').innerHTML = '';
+  });
+});
