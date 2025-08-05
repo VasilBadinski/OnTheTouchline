@@ -1,0 +1,77 @@
+.quiz-results-page {
+  display: block;
+  max-width: 900px;
+  margin: 100px auto 40px;
+  padding: 0 20px;
+  color: #eee;
+  font-family: Arial, sans-serif;
+}
+
+.quiz-results-container,
+.quiz-leaderboard-container {
+  background-color: #151414;
+  border-radius: 8px;
+  padding: 20px 25px;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.quiz-score {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.quiz-leaderboard-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.quiz-leaderboard-table thead th {
+  background-color: #222;
+  border-bottom: 1px solid white;
+  text-align: left;
+  vertical-align: middle;
+  padding: 8px 12px;
+}
+
+.quiz-leaderboard-table thead th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.quiz-leaderboard-table thead th:last-child {
+  border-top-right-radius: 10px;
+}
+
+.quiz-leaderboard-table tbody tr {
+  background-color: #222;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.quiz-leaderboard-table tbody td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #444;
+}
+
+.quiz-leaderboard-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.quiz-leaderboard-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.quiz-leaderboard-table thead th:nth-child(2),
+.quiz-leaderboard-table tbody td:nth-child(2) {
+  width: 40%;
+  max-width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

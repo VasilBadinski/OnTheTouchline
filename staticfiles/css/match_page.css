@@ -1,0 +1,152 @@
+.page-center1 {
+  display: flex;
+  justify-content: center;
+}
+
+.content-wrapper-outer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 15px;
+}
+
+.matchcard-card {
+  background-color: #1c1c1c;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 50px;
+  margin-top: 100px;
+  position: relative;
+  color: white;
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+  max-width: 1100px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.matchcard-date-topright {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  user-select: none;
+}
+
+.matchcard-teams {
+  display: grid;
+  grid-template-columns: 300px auto 300px;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.matchcard-team {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: white;
+  min-width: 300px;
+}
+
+.matchcard-team a {
+  color: white;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 1.8rem;
+}
+
+.matchcard-team a:hover {
+  text-decoration: underline;
+}
+
+.matchcard-away {
+  justify-content: flex-end;
+}
+
+.matchcard-home {
+  justify-content: flex-start;
+}
+
+.matchcard-mini-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.matchcard-match-time {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  border-bottom: 2px solid white;
+  display: inline-block;
+  padding: 6px 0;
+  justify-self: center;
+}
+
+.standings-section {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.standings-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 15px;
+  color: white;
+  border-bottom: 4px solid #b00020;
+  padding-bottom: 5px;
+}
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 1.1rem;
+}
+
+.standings-table thead {
+  background: #1c1c1c;
+}
+
+.standings-table th,
+.standings-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #444;
+}
+
+.standings-table th {
+  color: white;
+  font-weight: 900;
+}
+
+.standings-table td {
+  color: #f0eaea;
+  font-size: 1.05rem;
+}
+
+.team-logo {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  vertical-align: middle;
+  border-radius: 4px;
+}
+
+.empty-standings {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: #ff4d4f;
+  text-align: center;
+}

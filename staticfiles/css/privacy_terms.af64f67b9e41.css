@@ -1,0 +1,17 @@
+.centered-container {
+    max-width: 800px;
+    margin: 100px auto;
+    text-align: left;
+    font-family: Arial, sans-serif;
+}
+
+.centered-container h1,
+.centered-container h2 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.centered-container ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}

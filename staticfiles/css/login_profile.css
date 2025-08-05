@@ -1,0 +1,109 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page-center {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-wrapper {
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-container {
+  background: #1c1c1c;
+  padding: 40px 45px;
+  border-radius: 20px;
+  width: 360px;
+  max-width: 95vw;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.auth-container h2 {
+  margin-bottom: 28px;
+  font-weight: 900;
+  font-size: 2.1rem;
+  color: white;
+  letter-spacing: 1.5px;
+}
+
+.auth-form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  border: 2px solid white;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  background: #444;
+  color: #f0eaea;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.auth-form input::placeholder {
+  color: white;
+}
+
+.auth-form input:focus {
+  background: #420d0d;
+  outline: none;
+}
+
+.auth-form .btn-primary {
+  width: 100%;
+  padding: 16px;
+  background: #b00020;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-weight: 900;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background 0.4s ease;
+}
+
+.auth-form .btn-primary:hover {
+  background: #ff3b3b;
+}
+
+.auth-footer-text {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  color: #d4a2a2;
+}
+
+.auth-footer-text a {
+  color: #b00020;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.auth-footer-text a:hover {
+  color: #ff5656;
+}
+
+.form-error {
+  color: #ff4d4f;
+  font-size: 0.95rem;
+  margin: 6px 0 10px;
+  text-align: left;
+}
