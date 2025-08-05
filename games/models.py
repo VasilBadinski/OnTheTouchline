@@ -47,4 +47,4 @@ class QuizAttempt(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     score = models.FloatField()
-    time_completion = models.DateTimeField(default=timezone.now())
+    time_completion = models.DateTimeField(null=True)

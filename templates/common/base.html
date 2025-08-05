@@ -13,47 +13,45 @@
     <div class="layout-wrapper">
         <header>
             <div class="header-inner">
-                <a href="javascript:void(0)" class="x-button" onclick="openNav()">
-                    <img src="{% static 'images/main-menu.png' %}" alt="меню" class="menu">
-                </a>
-
-                <a href="{% url 'home' %}" class="logo">
-                    <img src="{% static 'images/freepik.png' %}" alt="лого"/>
-                </a>
-
-                <div class="search-wrapper">
-                    <form class="header-search-form">
-                      <div class="search-wrapper">
-                        <div class="search-icon">⌕</div>
-                        <input id="search-input" class="header-search-input" type="text" placeholder="Търси..." autocomplete="off" />
-                        <div id="clear-icon" class="clear-icon">×</div>
-                      </div>
-                    </form>
-
-                    <div id="search-results"></div>
-                </div>
-
-                {% if not request.user.is_authenticated %}
-                    <div class="auth-links">
-                        <a href="{% url 'login' %}" class="login">
-                            <span>Вход</span>
-                        </a>
-                        <a href="{% url 'register' %}" class="register">
-                            <span>Регистрация</span>
-                        </a>
-                    </div>
-                {% else %}
-                    <a href="{% url 'detail-profile' user.pk %}" class="login user-link">
-                        {% if profile.profile_picture %}
-                            <img src="{{ profile.profile_picture }}" alt="потребител">
-                        {% else %}
-                            <img src="{% static 'images/user-interface.png' %}" alt="потребител">
-                        {% endif %}
+                <div class="header-left">
+                    <a href="javascript:void(0)" class="x-button" onclick="openNav()">
+                        <img src="{% static 'images/main-menu.png' %}" alt="меню" class="menu">
                     </a>
-                {% endif %}
+                    <a href="{% url 'home' %}" class="logo">
+                        <img src="{% static 'images/freepik.png' %}" alt="лого"/>
+                    </a>
+                    <div class="search-wrapper">
+                        <form class="header-search-form">
+                          <div class="search-wrapper">
+                            <div class="search-icon">⌕</div>
+                            <input id="search-input" class="header-search-input" type="text" placeholder="Търси..." autocomplete="off" />
+                            <div id="clear-icon" class="clear-icon">×</div>
+                          </div>
+                        </form>
+                        <div id="search-results"></div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    {% if not request.user.is_authenticated %}
+                        <div class="auth-links">
+                            <a href="{% url 'login' %}" class="login">
+                                <span>Вход</span>
+                            </a>
+                            <a href="{% url 'register' %}" class="register">
+                                <span>Регистрация</span>
+                            </a>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'detail-profile' user.pk %}" class="login user-link">
+                            {% if profile.profile_picture %}
+                                <img src="{{ profile.profile_picture }}" alt="потребител">
+                            {% else %}
+                                <img src="{% static 'images/user-interface.png' %}" alt="потребител">
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                </div>
             </div>
-
-            <!-- Sidebar Navigation -->
             <nav id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <a href="{% url 'home' %}">Начало</a>
@@ -69,7 +67,6 @@
                 </div>
                 <a href="{% url 'news' %}">Новини</a>
                 <a href="{% url 'games' %}">Игри</a>
-
                 {% if user.is_staff %}
                     <hr class="menu-separator">
                     <a href="{% url 'article-create' %}">Добави новина</a>
@@ -81,12 +78,10 @@
                 {% endif %}
             </nav>
         </header>
-
         <main class="layout-content">
             {% block content %}
             {% endblock %}
         </main>
-
         <footer>
             <div class="footer-container">
                 <nav class="footer-nav">
@@ -99,7 +94,6 @@
             </div>
         </footer>
     </div>
-
     <script src="{% static 'js/functions.js' %}"></script>
 </body>
 </html>

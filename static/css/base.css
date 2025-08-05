@@ -321,10 +321,28 @@ footer {
   padding: 10px 12px;
   cursor: pointer;
   color: white;
-  font-size: 14px;
+  font-size: 15px;
   text-decoration: none;
   display: block;
   width: auto;
+}
+
+.result-item span {
+  display: inline-block;
+  transform: translateY(-8px);
+}
+
+.result-item img.player-photo {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+}
+
+.result-item img.club-logo,
+.result-item img.league-logo {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
 .result-item:hover {
@@ -352,4 +370,19 @@ footer {
 
 *::-webkit-scrollbar-thumb:hover {
   background-color: #666;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
 }

@@ -217,21 +217,34 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   function renderResults(data) {
-      const players = data.players.map(p => `<a href="/players/${p.slug}/" class="result-item">👤 ${p.name}</a>`).join('');
-      const leagues = data.leagues.map(l => `<a href="/leagues/${l.slug}/" class="result-item">🏆 ${l.name}</a>`).join('');
-      const clubs = data.clubs.map(c => `<a href="/clubs/${c.slug}/" class="result-item">⚽ ${c.name}</a>`).join('');
+    const players = data.players.map(p =>
+      `<a href="/players/${p.slug}/" class="result-item">
+        <img class="player-photo" src="${p.photo}" alt="${p.name}">
+        <span>${p.name}</span>
+      </a>`
+    ).join('');
 
-      if (!players && !leagues && !clubs) {
-        resultsDiv.innerHTML = '<p class="no-results">No results found.</p>';
-      } else {
-        resultsDiv.innerHTML = `
-          ${players}
-          ${leagues}
-          ${clubs}
-        `;
-      }
+    const leagues = data.leagues.map(l =>
+      `<a href="/leagues/${l.slug}/" class="result-item">
+        <img class="league-logo" src="${l.logo}" alt="${l.name}">
+        <span>${l.name}</span>
+      </a>`
+    ).join('');
 
-      resultsDiv.style.display = 'block';
+    const clubs = data.clubs.map(c =>
+      `<a href="/clubs/${c.slug}/" class="result-item">
+        <img class="club-logo" src="${c.logo}" alt="${c.name}">
+        <span>${c.name}</span>
+      </a>`
+    ).join('');
+
+    if (!players && !leagues && !clubs) {
+      resultsDiv.innerHTML = '<p class="no-results">No results found.</p>';
+    } else {
+      resultsDiv.innerHTML = players + leagues + clubs;
+    }
+
+    resultsDiv.style.display = 'block';
   }
 
   document.addEventListener('click', function (e) {
@@ -240,6 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
 
 document.addEventListener('DOMContentLoaded', function () {
   const searchInput = document.getElementById('search-input');
