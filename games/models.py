@@ -13,7 +13,7 @@ class Quiz(models.Model):
     slug = models.SlugField(max_length=150, unique=True, editable=False)
 
     def save(self, *args, **kwargs):
-        base_slug = slugify(self.title)
+        base_slug = slugify(self.eng_title)
         slug = base_slug
         num = 1
 
